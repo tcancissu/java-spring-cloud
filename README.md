@@ -1,7 +1,6 @@
 # java-spring-cloud
-Estudando arquitetura de microserviços com Java, Spring Cloud e AWS CDK. 
+Arquitetura de microserviços com Java, Spring Cloud e AWS CDK. 
 
-Aprendizados:
 - Usar a dependência do ModelMapper para converter os dados do model para o DTO e vice versa;
 - Criação de uma classe de configuração, usando as anotações @Configuration e @Bean do Spring, para que possamos usar o ModelMapper na classe de serviço com injeção de dependência;
 - O conceito de service discovery, que é o mecanismo de descoberta do endereço do microsserviço pelo nome, desacoplando um microsserviço do outro pelo IP ou porta;
