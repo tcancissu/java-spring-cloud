@@ -63,7 +63,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"valor\": 1000,\r\n    \"nome\": \"Thiago\",\r\n    \"numero\": \"12345690\",\r\n    \"expiracao\": \"10/29\",\r\n    \"codigo\": \"123\",\r\n    \"pedidoId\": 3,\r\n    \"formaDePagamentoId\": 1\r\n}",
+							"raw": "{\r\n    \"valor\": 400,\r\n    \"nome\": \"Thiago\",\r\n    \"numero\": \"0000\",\r\n    \"expiracao\": \"10/29\",\r\n    \"codigo\": \"123\",\r\n    \"pedidoId\": 9,\r\n    \"formaDePagamentoId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -71,13 +71,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/pagamentos",
+							"raw": "localhost:8080/pagamentos/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"pagamentos"
+								"pagamentos",
+								""
 							]
 						}
 					},
@@ -146,7 +147,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"valor\": 22500,\r\n    \"nome\": \"Thiago\",\r\n    \"numero\": \"12345678\",\r\n    \"expiracao\": \"10/29\",\r\n    \"codigo\": \"123\",\r\n    \"pedidoId\": 1,\r\n    \"formaDePagamentoId\": 1,\r\n    \"status\": \"CRIADO\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -154,14 +155,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/pagamentos/8/confirmar",
+							"raw": "localhost:8080/pagamentos/9/confirmar",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"pagamentos",
-								"8",
+								"9",
 								"confirmar"
 							]
 						}
@@ -227,7 +228,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"itens\": [\r\n    {\r\n        \"quantidade\": 1,\r\n        \"descrição\": \"Teclado\"\r\n    },\r\n    {\r\n        \"quantidade\": 1,\r\n        \"descrição\": \"Mouse\"\r\n    }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"itens\": [\r\n    {\r\n        \"quantidade\": 1,\r\n        \"descrição\": \"Caneta\"\r\n    },\r\n    {\r\n        \"quantidade\": 1,\r\n        \"descrição\": \"Caderno\"\r\n    }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

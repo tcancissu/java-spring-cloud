@@ -5,6 +5,8 @@ import br.com.myfood.pagamentos.service.PagamentoService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,9 @@ public class PagamentoController {
 
     @Autowired
     private PagamentoService service;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @GetMapping("/porta")
     public String retornaPorta(@Value("${local.server.port}") String porta){
@@ -44,6 +49,7 @@ public class PagamentoController {
         PagamentoDto pagamento = service.criarPagamento(dto);
         URI endereco = uriBuilder.path("/pagamentos/{id}").buildAndExpand(pagamento.getId()).toUri();
 
+        rabbitTemplate.convertAndSend("pagamentos.ex","pagamento.concluido", pagamento);
         return ResponseEntity.created(endereco).body(pagamento);
     }
 

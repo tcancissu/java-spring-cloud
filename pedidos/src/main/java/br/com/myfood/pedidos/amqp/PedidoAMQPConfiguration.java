@@ -1,11 +1,6 @@
-package br.com.myfood.avaliacao.amqp;
+package br.com.myfood.pedidos.amqp;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.ExchangeBuilder;
-import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.QueueBuilder;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -16,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AvaliacaoAMQPConfiguration {
+public class PedidoAMQPConfiguration {
 
     @Bean
     public RabbitAdmin criaRabbitAdmin(ConnectionFactory conn) {
@@ -34,25 +29,16 @@ public class AvaliacaoAMQPConfiguration {
     }
 
     @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory,
-                                         Jackson2JsonMessageConverter messageConverter){
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory, Jackson2JsonMessageConverter messageConverter){
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(messageConverter);
-        return  rabbitTemplate;
+        return rabbitTemplate;
     }
 
     @Bean
-    public Queue filaDetalhesAvaliacao() {
+    public Queue filaDetalhesPedido() {
         return QueueBuilder
-                .nonDurable("pagamentos.detalhes-avaliacao")
-                .deadLetterExchange("pagamentos.dlx")
-                .build();
-    }
-
-    @Bean
-    public Queue filaDlqDetalhesAvaliacao() {
-        return QueueBuilder
-                .nonDurable("pagamentos.detalhes-avaliacao-dlq")
+                .nonDurable("pagamentos.detalhes-pedido")
                 .build();
     }
 
@@ -64,23 +50,10 @@ public class AvaliacaoAMQPConfiguration {
     }
 
     @Bean
-    public FanoutExchange deadLetterExchange() {
-        return ExchangeBuilder
-                .fanoutExchange("pagamentos.dlx")
-                .build();
-    }
-
-    @Bean
-    public Binding bindPagamentoAvaliacao() {
+    public Binding bindPagamentoPedido(FanoutExchange fanoutExchange) {
         return BindingBuilder
-                .bind(filaDetalhesAvaliacao())
+                .bind(filaDetalhesPedido())
                 .to(fanoutExchange());
     }
 
-    @Bean
-    public Binding bindDlxPagamentoAvaliacao() {
-        return BindingBuilder
-                .bind(filaDlqDetalhesAvaliacao())
-                .to(deadLetterExchange());
-    }
 }

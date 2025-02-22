@@ -29,3 +29,5 @@ target/
 *.tar.gz
 *.rar
 
+# RabbitMQ Dados
+rabbitmq/
