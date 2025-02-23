@@ -31,3 +31,6 @@ target/
 
 # RabbitMQ Dados
 rabbitmq/
+
+# MySQL Dados
+mysql/
